@@ -15,5 +15,12 @@ export function readFile(filename?: string): string[] {
   } else {
     filename = process.argv[1].replace('.js', '.txt');
   }
-  return fs.readFileSync(filename, 'utf8').split('\n');
+  const lines = fs.readFileSync(filename, 'utf8').split('\n');
+
+  // remove the final newline
+  if (lines[lines.length - 1] === '') {
+    lines.pop();
+  }
+
+  return lines;
 }
