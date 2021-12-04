@@ -10,6 +10,18 @@ export function toBinary(n): string {
   return binary;
 }
 
+export function binaryToNumber(binary: string): number {
+  let bitValue = 1;
+  let value = 0;
+  for (let i = binary.length - 1; i >= 0; i--) {
+    if (binary[i] === '1') {
+      value += bitValue;
+    }
+    bitValue *= 2;
+  }
+  return value;
+}
+
 /** Combine two strings, from the internet */
 export function add(str1: string, str2: string): string {
   let sum = '';  // our result will be stored in a string.
