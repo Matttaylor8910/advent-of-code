@@ -11,8 +11,24 @@ function partOne(depths: number[]): number {
   return larger;
 }
 
-function partTwo(depths: number[]): string|number {
-  return 'todo';
+function partTwo(depths: number[]): number {
+  let [a, b, c] = depths;
+
+  let larger = 0
+  let lastSum = a + b + c;
+
+  for (let i = 3; i < depths.length; i++) {
+    const newSum = lastSum + depths[i] - a;
+    a = b;
+    b = c;
+    c = depths[i];
+    if (newSum > lastSum) {
+      larger++;
+    }
+    lastSum = newSum;
+  }
+
+  return larger;
 }
 
 function parseInput(): number[] {
