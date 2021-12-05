@@ -16,6 +16,10 @@ interface Position {
   horizontal: number;
 }
 
+interface PositionWithAim extends Position {
+  aim: number;
+}
+
 function partOne(instructions: Instruction[]): number {
   const position = newPosition();
 
@@ -25,14 +29,12 @@ function partOne(instructions: Instruction[]): number {
 }
 
 function partTwo(instructions: Instruction[]): string|number {
-  return 'todo';
-}
+  const position = newPositionWithAim();
 
-function parseInput(): Instruction[] {
-  return readFile().map(x => {
-    const [direction, units] = x.split(' ');
-    return {direction: direction as Direction, units: Number(units)};
-  });
+  instructions.forEach(
+      instruction => updatePositionWithAim(position, instruction));
+
+  return position.depth * position.horizontal;
 }
 
 // Given an instruction, update the position in place
@@ -52,8 +54,38 @@ function updatePosition(position: Position, instruction: Instruction) {
   }
 }
 
+// Given an instruction, update the position in place
+function updatePositionWithAim(
+    position: PositionWithAim, instruction: Instruction) {
+  switch (instruction.direction) {
+    case Direction.UP:
+      position.aim -= instruction.units;
+      return;
+    case Direction.DOWN:
+      position.aim += instruction.units;
+      return;
+    case Direction.FORWARD:
+      position.horizontal += instruction.units;
+      position.depth += position.aim * instruction.units;
+      return;
+    default:
+      throw `Unknown direction "${instruction.direction}"`;
+  }
+}
+
 function newPosition(): Position {
   return {depth: 0, horizontal: 0};
+}
+
+function newPositionWithAim(): PositionWithAim {
+  return {depth: 0, horizontal: 0, aim: 0};
+}
+
+function parseInput(): Instruction[] {
+  return readFile('example').map(x => {
+    const [direction, units] = x.split(' ');
+    return {direction: direction as Direction, units: Number(units)};
+  });
 }
 
 const instructions = parseInput();
