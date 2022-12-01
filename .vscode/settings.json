@@ -12,5 +12,6 @@
     "**README**": true,
   },
   "editor.defaultFormatter": "xaver.clang-format",
-  "files.trimTrailingWhitespace": true
+  "files.trimTrailingWhitespace": true,
+  "terminal.integrated.gpuAcceleration": "off"
 }
