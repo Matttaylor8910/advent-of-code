@@ -1,18 +1,29 @@
 import {readFile} from '../../common/file';
 
-
-function partOne(): string {
-  return 'TODO part 1';
+function partOne(elves: number[]): number {
+  return elves[0];
 }
 
-function partTwo(): string {
-  return 'TODO part 2';
+function partTwo(elves: number[]): number {
+  return elves.slice(0, 3).reduce((sum, elf) => sum + elf, 0);
 }
 
 function parseInput(): number[] {
-  return readFile().map(Number);
+  const lines = readFile();
+  let currentElf = 0;
+  const elves: number[] = [];
+  for (const line of lines) {
+    if (line.length) {
+      currentElf += Number(line);
+    } else {
+      elves.push(currentElf);
+      currentElf = 0;
+    }
+  }
+
+  return elves.sort((a, b) => b - a);
 }
 
-const nums = parseInput();
-console.log(partOne());
-console.log(partTwo());
+const elves = parseInput();
+console.log(partOne(elves));
+console.log(partTwo(elves));
