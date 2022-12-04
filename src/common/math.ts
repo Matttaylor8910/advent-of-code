@@ -68,3 +68,8 @@ export function add(str1: string, str2: string): string {
 
   return sum;  // return sum
 }
+
+export function hasOverlap(
+    x1: number, x2: number, y1: number, y2: number): boolean {
+  return Math.max(x1, y1) <= Math.min(x2, y2);
+}
