@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "print": "tsc -t es5 src/$npm_config_year/day$npm_config_sol/day$npm_config_sol.ts && node src/$npm_config_year/day$npm_config_sol/day$npm_config_sol.js"
+    "print": "tsc -t es5 src/$npm_config_year/day$npm_config_sol/day$npm_config_sol.ts && time node src/$npm_config_year/day$npm_config_sol/day$npm_config_sol.js"
   },
   "author": "",
   "license": "ISC",
