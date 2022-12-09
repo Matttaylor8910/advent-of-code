@@ -65,17 +65,12 @@ function adjustNext(segment: Segment) {
 
   // see if the tail is too far away, move it as necessary
   if (Math.abs(head.col - tail.col) > 1 || Math.abs(head.row - tail.row) > 1) {
-    // both row and col are not the same, diagonal required
-    if (head.col !== tail.col && head.row !== tail.row) {
-      tail.col += head.col > tail.col ? 1 : -1;
-      tail.row += head.row > tail.row ? 1 : -1;
-    }
-    // they're in the same row, move left or right to correct
-    else if (head.col !== tail.col) {
+    // they're not in the same col, move left or right to correct
+    if (head.col !== tail.col) {
       tail.col += head.col > tail.col ? 1 : -1;
     }
-    // they're in the same col, move up or down to correct
-    else {
+    // they're not in the same row, move up or down to correct
+    if (head.row !== tail.row) {
       tail.row += head.row > tail.row ? 1 : -1;
     }
   }
