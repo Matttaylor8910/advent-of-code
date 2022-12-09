@@ -35,8 +35,8 @@ function getRope(length: number): {head: Segment, tail: Segment} {
 }
 
 /**
- * Move a given segment of rope in the given direction, then recursively adjust
- * the next segment in the rope as needed
+ * Move a given segment of rope in the given direction, then adjust each
+ * following segment in the rope as needed
  * @param segment
  * @param direction
  */
@@ -46,36 +46,29 @@ function move(segment: Segment, direction: Direction) {
   if (direction === Direction.DOWN) segment.row++;
   if (direction === Direction.RIGHT) segment.col++;
 
-  adjustNext(segment);
-}
+  // iterate through the length of the rope, updating locations as necessary
+  while (segment.next) {
+    const head = segment;
+    const tail = segment.next;
 
-/**
- * Given a segement of rope, adjust the next segment (if exists) based on this
- * segment's location. Then adjust the next segment recursively until we've
- * reached the tail
- * @param segment
- * @returns
- */
-function adjustNext(segment: Segment) {
-  const head = segment;
-  const tail = segment.next;
-
-  // short circuit if we are at the tail node
-  if (!tail) return;
-
-  // see if the tail is too far away, move it as necessary
-  if (Math.abs(head.col - tail.col) > 1 || Math.abs(head.row - tail.row) > 1) {
-    // they're not in the same col, move left or right to correct
-    if (head.col !== tail.col) {
-      tail.col += head.col > tail.col ? 1 : -1;
+    // see if the next segment is too far away, move it as necessary
+    if (Math.abs(head.col - tail.col) > 1 ||
+        Math.abs(head.row - tail.row) > 1) {
+      // they're not in the same col, move left or right to correct
+      if (head.col !== tail.col) {
+        tail.col += head.col > tail.col ? 1 : -1;
+      }
+      // they're not in the same row, move up or down to correct
+      if (head.row !== tail.row) {
+        tail.row += head.row > tail.row ? 1 : -1;
+      }
+    } else {
+      // if we didn't move this one, we don't need to move any others
+      break;
     }
-    // they're not in the same row, move up or down to correct
-    if (head.row !== tail.row) {
-      tail.row += head.row > tail.row ? 1 : -1;
-    }
+
+    segment = tail;
   }
-
-  adjustNext(tail);
 }
 
 const lines = readFile();
