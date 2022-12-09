@@ -48,26 +48,25 @@ function move(segment: Segment, direction: Direction) {
 
   // iterate through the length of the rope, updating locations as necessary
   while (segment.next) {
-    const head = segment;
-    const tail = segment.next;
+    const {next} = segment;
 
     // see if the next segment is too far away, move it as necessary
-    if (Math.abs(head.col - tail.col) > 1 ||
-        Math.abs(head.row - tail.row) > 1) {
+    if (Math.abs(segment.col - next.col) > 1 ||
+        Math.abs(segment.row - next.row) > 1) {
       // they're not in the same col, move left or right to correct
-      if (head.col !== tail.col) {
-        tail.col += head.col > tail.col ? 1 : -1;
+      if (segment.col !== next.col) {
+        next.col += segment.col > next.col ? 1 : -1;
       }
       // they're not in the same row, move up or down to correct
-      if (head.row !== tail.row) {
-        tail.row += head.row > tail.row ? 1 : -1;
+      if (segment.row !== next.row) {
+        next.row += segment.row > next.row ? 1 : -1;
       }
     } else {
       // if we didn't move this one, we don't need to move any others
       break;
     }
 
-    segment = tail;
+    segment = next;
   }
 }
 
