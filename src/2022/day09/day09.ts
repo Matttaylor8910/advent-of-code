@@ -9,10 +9,10 @@ interface Segment {
 }
 
 enum Direction {
-  L = 'L',
-  R = 'R',
-  U = 'U',
-  D = 'D',
+  LEFT = 'L',
+  RIGHT = 'R',
+  UP = 'U',
+  DOWN = 'D',
 }
 
 /**
@@ -41,10 +41,10 @@ function getRope(length: number): {head: Segment, tail: Segment} {
  * @param direction
  */
 function move(segment: Segment, direction: Direction) {
-  if (direction === Direction.L) segment.col--;
-  if (direction === Direction.R) segment.col++;
-  if (direction === Direction.U) segment.row--;
-  if (direction === Direction.D) segment.row++;
+  if (direction === Direction.UP) segment.row--;
+  if (direction === Direction.LEFT) segment.col--;
+  if (direction === Direction.DOWN) segment.row++;
+  if (direction === Direction.RIGHT) segment.col++;
 
   adjustNext(segment);
 }
