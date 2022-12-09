@@ -9,10 +9,10 @@ interface Segment {
 }
 
 enum Direction {
-  LEFT = 'L',
-  RIGHT = 'R',
   UP = 'U',
+  LEFT = 'L',
   DOWN = 'D',
+  RIGHT = 'R',
 }
 
 /**
