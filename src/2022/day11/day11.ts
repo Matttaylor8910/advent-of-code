@@ -124,19 +124,6 @@ function getMonkeyBusiness(monkeys: Monkey[]): number {
       .reduce((total, b) => total * b.itemsInspected, 1);
 }
 
-function printMonkeys(monkeys: Monkey[]) {
-  monkeys.forEach((monkey, i) => {
-    console.log(
-        `Monkey ${i}: ${monkey.items.map(i => i.toString()).join(', ')}`);
-  });
-}
-
-function printMonkeyInspections(monkeys: Monkey[]) {
-  monkeys.forEach((monkey, i) => {
-    console.log(`Monkey ${i} inspected items ${monkey.itemsInspected} times`);
-  });
-}
-
 const lines = readFile();
 
 // part 1
@@ -144,8 +131,6 @@ let monkeys = parseMonkeys(lines);
 for (let i = 0; i < 20; i++) {
   executeRound(monkeys, true);
 }
-printMonkeys(monkeys);
-printMonkeyInspections(monkeys);
 console.log(getMonkeyBusiness(monkeys));
 
 // part 2
