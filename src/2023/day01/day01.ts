@@ -3,16 +3,17 @@ import {readFile} from '../../common/file';
 const DIGITS = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const STRING_DIGITS =
     ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-const numberMap = new Map<string, string>();
-numberMap.set('one', '1');
-numberMap.set('two', '2');
-numberMap.set('three', '3');
-numberMap.set('four', '4');
-numberMap.set('five', '5');
-numberMap.set('six', '6');
-numberMap.set('seven', '7');
-numberMap.set('eight', '8');
-numberMap.set('nine', '9');
+const numberMap = new Map<string, string>([
+  ['one', '1'],
+  ['two', '2'],
+  ['three', '3'],
+  ['four', '4'],
+  ['five', '5'],
+  ['six', '6'],
+  ['seven', '7'],
+  ['eight', '8'],
+  ['nine', '9'],
+]);
 
 function partOne(lines: string[]): number {
   return lines.reduce(
