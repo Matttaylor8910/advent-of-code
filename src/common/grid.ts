@@ -1,11 +1,11 @@
 import {cloneDeep} from 'lodash';
 
-interface DirectionOffset {
+export interface DirectionOffset {
   x: number;
   y: number;
 }
 
-const Direction: {[direction: string]: DirectionOffset} = {
+export const Direction: {[direction: string]: DirectionOffset} = {
   N: {x: 0, y: -1},
   NE: {x: 1, y: -1},
   E: {x: 1, y: 0},
@@ -77,7 +77,9 @@ export class Grid {
     const map = new Map<string, number>();
 
     this.getNeighbors(row, col, skipOver).forEach(neighbor => {
-      map.set(neighbor, (map.get(neighbor) || 0) + 1);
+      if (neighbor !== null) {
+        map.set(neighbor, (map.get(neighbor) || 0) + 1);
+      }
     });
 
     return map;
@@ -89,7 +91,7 @@ export class Grid {
    * @param col
    * @param skipOver
    */
-  getNeighbors(row: number, col: number, skipOver?: string[]): string[] {
+  getNeighbors(row: number, col: number, skipOver?: string[]): (string|null)[] {
     return [
       this.getDirection(row, col, Direction.N, skipOver),
       this.getDirection(row, col, Direction.NE, skipOver),
@@ -99,7 +101,7 @@ export class Grid {
       this.getDirection(row, col, Direction.SW, skipOver),
       this.getDirection(row, col, Direction.W, skipOver),
       this.getDirection(row, col, Direction.NW, skipOver),
-    ].filter(neighbor => neighbor !== null);
+    ];
   }
 
   /**
