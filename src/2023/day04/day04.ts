@@ -37,8 +37,7 @@ function getMatches(card: Card): number {
 
 function parseInput(): Card[] {
   return readFile().map(line => {
-    const [, p2] = line.split(':');
-    const [winners, losers] = p2.split('|');
+    const [winners, losers] = line.split(':')[1].split('|');
 
     const card: Card = {
       winners: new Set<number>(),
