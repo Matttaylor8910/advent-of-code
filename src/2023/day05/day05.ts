@@ -36,13 +36,13 @@ function partTwo({seeds, maps}: {
   return lowest;
 }
 
-function findLocationNumber(location: number, maps: DestSourceMap[]): number {
-  for (const map of maps) {
+function findLocationNumber(current: number, maps: DestSourceMap[]): number {
+  for (const rules of maps) {
     // if we're in a range of a rule in this map, apply the change
-    const rule = map.find(rule => rule.min <= location && location <= rule.max);
-    if (rule !== undefined) location += rule.change;
+    const rule = rules.find(rule => rule.min <= current && current <= rule.max);
+    if (rule !== undefined) current += rule.change;
   }
-  return location;
+  return current;
 }
 
 function parseInput(): {seeds: number[], maps: DestSourceMap[]} {
