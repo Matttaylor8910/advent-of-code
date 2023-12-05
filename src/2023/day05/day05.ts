@@ -46,7 +46,7 @@ function findLocationNumber(current: number, maps: DestSourceMap[]): number {
 }
 
 function parseInput(): {seeds: number[], maps: DestSourceMap[]} {
-  const lines = readFile('example').join('\n');
+  const lines = readFile().join('\n');
 
   const [, p1] = lines.split('seeds: ');
   const groups = p1.split('\n\n');
