@@ -11,8 +11,8 @@ function partOne(races: Race[]): number {
 
 function partTwo(races: Race[]): number {
   return countWins({
-    time: Number(races.map(race => `${race.time}`).join('')),
-    record: Number(races.map(race => `${race.record}`).join('')),
+    time: Number(races.map(({time}) => `${time}`).join('')),
+    record: Number(races.map(({record}) => `${record}`).join('')),
   });
 }
 
