@@ -73,3 +73,23 @@ export function hasOverlap(
     x1: number, x2: number, y1: number, y2: number): boolean {
   return Math.max(x1, y1) <= Math.min(x2, y2);
 }
+
+// Function to compute the GCD of two numbers
+export function gcd(a: number, b: number): number {
+  if (b === 0) return a;
+  return gcd(b, a % b);
+}
+
+// Returns LCM of array elements
+export function findlcm(arr: number[]): number {
+  // Initialize result
+  let ans = arr[0];
+
+  // ans contains LCM of arr[0], ..arr[i]
+  // after i'th iteration,
+  for (let i = 1; i < arr.length; i++) {
+    ans = (((arr[i] * ans)) / (gcd(arr[i], ans)));
+  }
+
+  return ans;
+}
