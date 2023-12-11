@@ -113,6 +113,19 @@ export class Grid {
         .reduce((a, b) => a + b);
   }
 
+  /**
+   * Return the coordinates of the first cell matching the input
+   * @param vallue
+   */
+  find(value: string): {row: number, col: number}|null {
+    for (let row = 0; row < this._grid.length; row++) {
+      for (let col = 0; col < this._grid[row].length; col++) {
+        if (this._grid[row][col] === value) return {row, col};
+      }
+    }
+    return null;
+  }
+
   toString(): string {
     return this._grid.map(row => row.join('')).join('');
   }
