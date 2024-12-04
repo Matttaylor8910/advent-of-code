@@ -1,8 +1,8 @@
 import {cloneDeep} from 'lodash';
 
 export interface DirectionOffset {
-  x: number;
-  y: number;
+  x: number;  // the row
+  y: number;  // the col
 }
 
 export const Direction: {[direction: string]: DirectionOffset} = {
@@ -22,7 +22,7 @@ export class Grid {
 
   private _grid: string[][];
 
-  constructor(grid: string[][]) {
+  constructor(grid: string[]|string[][]) {
     this._rows = grid ? grid.length : 0;
     this._cols = grid && grid[0] ? grid[0].length : 0;
     this._grid = cloneDeep(grid);
