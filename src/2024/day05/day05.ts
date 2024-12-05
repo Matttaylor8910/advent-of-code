@@ -37,10 +37,7 @@ function partTwo(rules: Map<number, number[]>, updates: number[][]): number {
     if (!isUpdateInCorrectOrder(update, rules)) {
       // for any updates NOT in order, first order them, then add the middle
       // page to the sum
-      update.sort((a, b) => {
-        const aAfter = rules.get(a) || [];
-        return aAfter.includes(b) ? -1 : 1;
-      });
+      update.sort((a, b) => rules.get(a)?.includes(b) ? -1 : 1);
       sum += update[Math.floor(update.length / 2)];
     }
   }
